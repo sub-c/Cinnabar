@@ -355,3 +355,15 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Exceptions for dependencies
+!/deps/debug/
+!/deps/debug/bin/
+!/deps/debug/bin/**
+!/deps/debug/lib/
+!/deps/debug/lib/**
+!/deps/release/
+!/deps/release/bin/
+!/deps/release/bin/**
+!/deps/release/lib/
+!/deps/release/lib/**
