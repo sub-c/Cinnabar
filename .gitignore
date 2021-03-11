@@ -356,6 +356,9 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
+# Extra ignores
+[Ii]nt/
+
 # Exceptions for dependencies
 !/deps/debug/
 !/deps/debug/bin/
