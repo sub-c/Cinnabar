@@ -17,9 +17,15 @@
     <ClCompile Include="src\PCH.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\PCH.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameApp.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

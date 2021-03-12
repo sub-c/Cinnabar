@@ -12,30 +12,66 @@
     <Filter Include="Source Files\Systems">
       <UniqueIdentifier>{2670527c-ba49-4be7-a729-450cb2b0a5bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ECS">
+      <UniqueIdentifier>{78ca3cd6-a0d7-424a-b56a-ace01cef0a14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{a2ef4434-1d4e-464f-9333-ea9caf6aa62b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\CinnabarApp.cpp">
+    <ClCompile Include="include\cinna\CinnabarApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\PCH.cpp">
+    <ClCompile Include="include\cinna\PCH.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\GraphicsSystem.cpp">
+    <ClCompile Include="include\cinna\GraphicsSystem.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\PCH.h">
+    <ClInclude Include="include\cinna\PCH.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\CinnabarApp.h">
+    <ClInclude Include="include\cinna\CinnabarApp.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\CinnabarException.h">
+    <ClInclude Include="include\cinna\CinnabarException.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\GraphicsSystem.h">
+    <ClInclude Include="include\cinna\GraphicsSystem.h">
       <Filter>Source Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\EcsAgent.h">
+      <Filter>Source Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\EcsComponentCache.h">
+      <Filter>Source Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\EcsComponentManager.h">
+      <Filter>Source Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\EcsEntityManager.h">
+      <Filter>Source Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\EcsEvent.h">
+      <Filter>Source Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\EcsEventManager.h">
+      <Filter>Source Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\EcsSystem.h">
+      <Filter>Source Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\EcsSystemManager.h">
+      <Filter>Source Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\EcsTypes.h">
+      <Filter>Source Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\GraphicsContext.h">
+      <Filter>Source Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

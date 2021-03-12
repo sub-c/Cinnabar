@@ -2,7 +2,7 @@
 
 #include "GraphicsSystem.h"
 
-namespace Cinnabar
+namespace cinna
 {
 
 }

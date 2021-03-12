@@ -11,18 +11,28 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\CinnabarApp.cpp" />
-    <ClCompile Include="src\GraphicsSystem.cpp" />
-    <ClCompile Include="src\PCH.cpp">
+    <ClCompile Include="include\cinna\CinnabarApp.cpp" />
+    <ClCompile Include="include\cinna\GraphicsSystem.cpp" />
+    <ClCompile Include="include\cinna\PCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\CinnabarApp.h" />
-    <ClInclude Include="src\CinnabarException.h" />
-    <ClInclude Include="src\GraphicsSystem.h" />
-    <ClInclude Include="src\PCH.h" />
+    <ClInclude Include="include\cinna\GraphicsContext.h" />
+    <ClInclude Include="include\cinna\CinnabarApp.h" />
+    <ClInclude Include="include\cinna\CinnabarException.h" />
+    <ClInclude Include="include\cinna\EcsAgent.h" />
+    <ClInclude Include="include\cinna\EcsComponentCache.h" />
+    <ClInclude Include="include\cinna\EcsComponentManager.h" />
+    <ClInclude Include="include\cinna\EcsEntityManager.h" />
+    <ClInclude Include="include\cinna\EcsEvent.h" />
+    <ClInclude Include="include\cinna\EcsEventManager.h" />
+    <ClInclude Include="include\cinna\EcsSystem.h" />
+    <ClInclude Include="include\cinna\EcsSystemManager.h" />
+    <ClInclude Include="include\cinna\EcsTypes.h" />
+    <ClInclude Include="include\cinna\GraphicsSystem.h" />
+    <ClInclude Include="include\cinna\PCH.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

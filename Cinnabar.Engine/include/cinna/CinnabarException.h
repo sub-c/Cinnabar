@@ -2,7 +2,7 @@
 
 #include "PCH.h"
 
-namespace Cinnabar
+namespace cinna
 {
 	class CinnabarException final : public exception
 	{

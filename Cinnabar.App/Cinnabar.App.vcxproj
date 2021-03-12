@@ -59,7 +59,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)deps\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)deps\include\;$(SolutionDir)Cinnabar.Engine\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PCH.h</PrecompiledHeaderFile>
@@ -69,6 +69,21 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>$(SolutionDir)deps\debug\lib\allegro_monolith-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Message>Copy third-party DLLs...</Message>
+      <Command>xcopy /E /Y "$(SolutionDir)deps\debug\bin\allegro_monolith-debug-5.2.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\libpng16.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\FLAC.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\vorbisfile.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\freetype.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\zlib1.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\physfs.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\ogg.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\bz2.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\vorbis.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\brotlidec.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\brotlicommon.dll" "$(TargetDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -78,7 +93,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)deps\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)deps\include\;$(SolutionDir)Cinnabar.Engine\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>PCH.h</PrecompiledHeaderFile>
@@ -90,8 +105,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>$(SolutionDir)deps\debug\lib\allegro_monolith-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Message>Copy third-party DLLs...</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameApp.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\PCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -99,6 +118,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GameApp.h" />
     <ClInclude Include="src\PCH.h" />
   </ItemGroup>
   <ItemGroup>

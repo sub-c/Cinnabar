@@ -8,8 +8,7 @@
 #include <string_view>
 #include <string>
 
-
-namespace Cinnabar
+namespace cinna
 {
 	using std::exception;
 	using std::shared_ptr;
