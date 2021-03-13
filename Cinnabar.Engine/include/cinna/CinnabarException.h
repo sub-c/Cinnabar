@@ -11,7 +11,11 @@ namespace cinna
 		{
 		}
 
-		CinnabarException(string const message) : exception(message.c_str())
+		CinnabarException(string const& message) : exception(message.c_str())
+		{
+		}
+
+		CinnabarException(stringstream const& message) : exception(message.str().c_str())
 		{
 		}
 	};

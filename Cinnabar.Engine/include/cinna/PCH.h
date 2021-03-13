@@ -10,10 +10,15 @@
 
 namespace cinna
 {
+	// Types
 	using std::exception;
 	using std::shared_ptr;
 	using std::string;
 	using std::string_view;
 	using std::stringstream;
 	using std::unique_ptr;
+
+	// Functions
+	using std::make_shared;
+	using std::make_unique;
 }

@@ -23,11 +23,14 @@ namespace cinna
 		shared_ptr<EcsAgent> ecs_agent_ { nullptr };
 
 	private:
-		void ensure_allegro_system_success(bool system_result, string_view const system_name);
+		void allegro_ensure_success(bool system_result, string_view const system_name);
+		void allegro_setup();
+		void allegro_shutdown();
+		void engine_initialize();
+		void engine_run();
+		void engine_shutdown();
 		void register_engine_components();
 		void register_engine_systems();
-		void setup_allegro();
-		void shutdown_allegro();
 
 		shared_ptr<GraphicsSystem> graphics_system_ { nullptr };
 	};
