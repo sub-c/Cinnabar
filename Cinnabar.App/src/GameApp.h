@@ -7,7 +7,7 @@
 class GameApp final : public cinna::CinnabarApp
 {
 protected:
-	virtual void register_components() override;
-	virtual void register_systems() override;
-	virtual void update() override;
+	void register_components() override;
+	void register_systems() override;
+	void update() override;
 };

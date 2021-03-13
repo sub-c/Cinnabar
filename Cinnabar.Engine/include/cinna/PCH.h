@@ -4,6 +4,7 @@
 
 #include <exception>
 #include <memory>
+#include <set>
 #include <sstream>
 #include <string_view>
 #include <string>
@@ -12,6 +13,7 @@ namespace cinna
 {
 	// Types
 	using std::exception;
+	using std::set;
 	using std::shared_ptr;
 	using std::string;
 	using std::string_view;

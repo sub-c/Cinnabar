@@ -3,6 +3,7 @@
 #include "PCH.h"
 
 #include "EcsAgent.h"
+#include "EngineContext.h"
 #include "GraphicsSystem.h"
 
 namespace cinna
@@ -29,9 +30,8 @@ namespace cinna
 		void engine_initialize();
 		void engine_run();
 		void engine_shutdown();
+		void handle_event(ALLEGRO_EVENT const& event, EngineContext& engine_context);
 		void register_engine_components();
 		void register_engine_systems();
-
-		shared_ptr<GraphicsSystem> graphics_system_ { nullptr };
 	};
 }

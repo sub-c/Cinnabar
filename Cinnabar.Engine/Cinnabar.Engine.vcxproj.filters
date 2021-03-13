@@ -18,6 +18,9 @@
     <Filter Include="Source Files\Components">
       <UniqueIdentifier>{a2ef4434-1d4e-464f-9333-ea9caf6aa62b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Constants">
+      <UniqueIdentifier>{e28711ef-850f-4489-add0-693b1215b4ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\cinna\CinnabarApp.cpp">
@@ -28,6 +31,12 @@
     </ClCompile>
     <ClCompile Include="include\cinna\GraphicsSystem.cpp">
       <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="include\cinna\GraphicsConstants.cpp">
+      <Filter>Source Files\Constants</Filter>
+    </ClCompile>
+    <ClCompile Include="include\cinna\EngineConstants.cpp">
+      <Filter>Source Files\Constants</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +81,15 @@
     </ClInclude>
     <ClInclude Include="include\cinna\GraphicsContext.h">
       <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\GraphicsConstants.h">
+      <Filter>Source Files\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\EngineContext.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\EngineConstants.h">
+      <Filter>Source Files\Constants</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

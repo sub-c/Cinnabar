@@ -8,5 +8,8 @@ namespace cinna
 {
 	class GraphicsSystem final : public EcsSystem
 	{
+	public:
+		void display_setup();
+		void display_shutdown();
 	};
 }

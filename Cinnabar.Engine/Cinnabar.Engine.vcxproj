@@ -11,6 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\cinna\EngineConstants.cpp" />
+    <ClCompile Include="include\cinna\GraphicsConstants.cpp" />
     <ClCompile Include="include\cinna\CinnabarApp.cpp" />
     <ClCompile Include="include\cinna\GraphicsSystem.cpp" />
     <ClCompile Include="include\cinna\PCH.cpp">
@@ -19,6 +21,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\cinna\EngineConstants.h" />
+    <ClInclude Include="include\cinna\EngineContext.h" />
+    <ClInclude Include="include\cinna\GraphicsConstants.h" />
     <ClInclude Include="include\cinna\GraphicsContext.h" />
     <ClInclude Include="include\cinna\CinnabarApp.h" />
     <ClInclude Include="include\cinna\CinnabarException.h" />

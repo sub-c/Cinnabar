@@ -1,9 +1,8 @@
 #pragma once
 
-#include "EcsTypes.h"
+#include "PCH.h"
 
-#include <memory>
-#include <set>
+#include "EcsTypes.h"
 
 namespace cinna
 {
@@ -12,7 +11,7 @@ namespace cinna
 	class EcsSystem
 	{
 	public:
-		std::shared_ptr<EcsAgent> ecs_agent { nullptr };
-		std::set<EcsEntity> entities {};
+		shared_ptr<EcsAgent> ecs_agent { nullptr };
+		set<EcsEntity> entities {};
 	};
 }
