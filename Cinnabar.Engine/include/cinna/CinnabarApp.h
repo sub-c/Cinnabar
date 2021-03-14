@@ -14,7 +14,7 @@ namespace cinna
 		CinnabarApp();
 		virtual ~CinnabarApp();
 
-		void run();
+		void run(EngineConfiguration& engine_config);
 
 	protected:
 		virtual bool can_shutdown() = 0;
@@ -29,7 +29,7 @@ namespace cinna
 		void allegro_setup();
 		void allegro_shutdown();
 		void engine_run();
-		void engine_setup();
+		void engine_setup(EngineConfiguration& engine_config);
 		void engine_shutdown();
 		void handle_event(ALLEGRO_EVENT const& event, EngineContext& engine_context);
 		void handle_shutdown_event(ALLEGRO_EVENT const& event, EngineContext& engine_context);

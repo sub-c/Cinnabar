@@ -1,6 +1,7 @@
 #include "PCH.h"
 
 #include "CinnabarException.h"
+#include "ConfigurationContext.h"
 #include "EcsAgent.h"
 #include "GraphicsConstants.h"
 #include "GraphicsContext.h"
@@ -10,6 +11,7 @@ namespace cinna
 {
 	void GraphicsSystem::display_setup()
 	{
+		auto& graphics_config = ecs_agent->get_component<ConfigurationContext>().graphics_configuration;
 		auto& graphics_context = ecs_agent->get_component<GraphicsContext>();
 
 		if (graphics_context.display != nullptr || graphics_context.display_buffer != nullptr)
@@ -17,9 +19,9 @@ namespace cinna
 			throw CinnabarException("Attempting to create a display while one is already active.");
 		}
 
-		al_set_new_window_title(GraphicsConstants::DEFAULT_DISPLAY_WINDOW_TITLE.c_str());
+		al_set_new_window_title(graphics_config.display_window_title.c_str());
 		al_set_new_display_flags(ALLEGRO_WINDOWED);
-		graphics_context.display = al_create_display(1920, 1080);
+		graphics_context.display = al_create_display(graphics_config.display_resolution_width, graphics_config.display_resolution_height);
 		if (graphics_context.display == nullptr)
 		{
 			graphics_context.display = al_create_display(GraphicsConstants::DEFAULT_DISPLAY_RESOLUTION_WIDTH, GraphicsConstants::DEFAULT_DISPLAY_RESOLUTION_HEIGHT);
@@ -32,7 +34,7 @@ namespace cinna
 		}
 
 		al_set_new_bitmap_flags(ALLEGRO_CONVERT_BITMAP | ALLEGRO_NO_PRESERVE_TEXTURE);
-		graphics_context.display_buffer = al_create_bitmap(1920, 1080);
+		graphics_context.display_buffer = al_create_bitmap(graphics_config.display_buffer_resolution_width, graphics_config.display_buffer_resolution_height);
 		if (graphics_context.display_buffer == nullptr)
 		{
 			throw CinnabarException("Could not create display buffer.");
@@ -40,9 +42,9 @@ namespace cinna
 		al_set_new_bitmap_flags(ALLEGRO_CONVERT_BITMAP);
 
 		graphics_context.display_clear_color = al_map_rgb_f(
-			GraphicsConstants::DEFAULT_DISPLAY_CLEAR_COLOR_R,
-			GraphicsConstants::DEFAULT_DISPLAY_CLEAR_COLOR_G,
-			GraphicsConstants::DEFAULT_DISPLAY_CLEAR_COLOR_B);
+			graphics_config.display_clear_color_r,
+			graphics_config.display_clear_color_g,
+			graphics_config.display_clear_color_b);
 	}
 
 	void GraphicsSystem::display_shutdown()

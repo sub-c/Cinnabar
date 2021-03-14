@@ -21,6 +21,9 @@
     <Filter Include="Source Files\Constants">
       <UniqueIdentifier>{e28711ef-850f-4489-add0-693b1215b4ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Models">
+      <UniqueIdentifier>{b441430a-87ca-405f-8e35-a9105854e7bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\cinna\CinnabarApp.cpp">
@@ -30,6 +33,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="include\cinna\GraphicsSystem.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="include\cinna\ConfigurationSystem.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
   </ItemGroup>
@@ -93,6 +99,18 @@
     </ClInclude>
     <ClInclude Include="include\cinna\InputContext.h">
       <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\EngineConfiguration.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\GraphicsConfiguration.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\ConfigurationSystem.h">
+      <Filter>Source Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\ConfigurationConstants.h">
+      <Filter>Source Files\Constants</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

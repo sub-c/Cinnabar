@@ -2,12 +2,14 @@
 
 #include "PCH.h"
 
+#include "ConfigurationSystem.h"
 #include "GraphicsSystem.h"
 
 namespace cinna
 {
 	struct EngineContext final
 	{
+		shared_ptr<ConfigurationSystem> configuration_system { nullptr };
 		shared_ptr<GraphicsSystem> graphics_system { nullptr };
 
 		ALLEGRO_EVENT_QUEUE* event_queue { nullptr };

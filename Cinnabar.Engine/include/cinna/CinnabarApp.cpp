@@ -4,6 +4,8 @@
 #include "CinnabarApp.h"
 #include "CinnabarException.h"
 #include "ConfigurationContext.h"
+#include "ConfigurationSystem.h"
+#include "EngineConfiguration.h"
 #include "EngineConstants.h"
 #include "EngineContext.h"
 #include "GraphicsContext.h"
@@ -14,13 +16,14 @@ namespace cinna
 	CinnabarApp::CinnabarApp()
 	{
 		ecs_agent_ = make_shared<EcsAgent>();
+
 	}
 
 	CinnabarApp::~CinnabarApp()
 	{
 	}
 
-	void CinnabarApp::run()
+	void CinnabarApp::run(EngineConfiguration& engine_config)
 	{
 		try
 		{
@@ -30,7 +33,7 @@ namespace cinna
 			register_components();
 			register_systems();
 
-			engine_setup();
+			engine_setup(engine_config);
 			engine_run();
 
 			engine_shutdown();
@@ -106,14 +109,16 @@ namespace cinna
 		}
 	}
 
-	void CinnabarApp::engine_setup()
+	void CinnabarApp::engine_setup(EngineConfiguration& engine_config)
 	{
 		auto& engine_context = ecs_agent_->get_component<EngineContext>();
 		auto& graphics_context = ecs_agent_->get_component<GraphicsContext>();
 
+		engine_context.configuration_system->apply_engine_configuration(engine_config);
+
 		engine_context.event_queue = al_create_event_queue();
 
-		engine_context.timer = al_create_timer(ALLEGRO_BPS_TO_SECS(EngineConstants::DefaultUpdatesPerSecond));
+		engine_context.timer = al_create_timer(ALLEGRO_BPS_TO_SECS(engine_config.updates_per_second));
 		al_register_event_source(engine_context.event_queue, al_get_timer_event_source(engine_context.timer));
 		al_start_timer(engine_context.timer);
 
@@ -125,6 +130,8 @@ namespace cinna
 	{
 		auto& engine_context = ecs_agent_->get_component<EngineContext>();
 		auto& graphics_context = ecs_agent_->get_component<GraphicsContext>();
+
+		engine_context.configuration_system->configuration_save();
 
 		al_unregister_event_source(engine_context.event_queue, al_get_display_event_source(graphics_context.display));
 		engine_context.graphics_system->display_shutdown();
@@ -194,6 +201,12 @@ namespace cinna
 	void CinnabarApp::register_engine_systems()
 	{
 		auto& engine_context = ecs_agent_->get_component<EngineContext>();
+
+		engine_context.configuration_system = ecs_agent_->register_system<ConfigurationSystem>();
+		{
+			EcsSignature signature;
+			ecs_agent_->set_system_signature<ConfigurationSystem>(signature);
+		}
 
 		engine_context.graphics_system = ecs_agent_->register_system<GraphicsSystem>();
 		{

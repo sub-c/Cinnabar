@@ -2,5 +2,6 @@
 
 namespace cinna::EngineConstants
 {
-	inline int const DefaultUpdatesPerSecond { 60 };
+	inline string const DEFAULT_CONFIGURATION_FILENAME { "CinnabarConfig.cfg" };
+	inline int const DEFAULT_UPDATES_PER_SECOND { 60 };
 }
