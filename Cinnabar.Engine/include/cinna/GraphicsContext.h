@@ -4,7 +4,7 @@
 
 namespace cinna
 {
-	struct GraphicsContext
+	struct GraphicsContext final
 	{
 		ALLEGRO_DISPLAY* display { nullptr };
 		ALLEGRO_BITMAP* display_buffer { nullptr };

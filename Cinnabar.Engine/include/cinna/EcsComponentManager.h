@@ -38,7 +38,7 @@ namespace cinna
 		template <typename T>
 		EcsComponentType get_component_type()
 		{
-			auto const type_name = typeid(T).name();
+			auto const* type_name = typeid(T).name();
 
 			assert(component_types_.find(type_name) != component_types_.end() && "Component not registered before use.");
 
@@ -46,9 +46,20 @@ namespace cinna
 		}
 
 		template <typename T>
+		bool is_component_registered()
+		{
+			auto const* type_name = typeid(T).name();
+			if (component_types_.find(type_name) == component_types_.end())
+			{
+				return false;
+			}
+			return true;
+		}
+
+		template <typename T>
 		void register_component()
 		{
-			auto const type_name = typeid(T).name();
+			auto const* type_name = typeid(T).name();
 
 			assert(component_types_.find(type_name) == component_types_.end() && "Registering the component more than once.");
 

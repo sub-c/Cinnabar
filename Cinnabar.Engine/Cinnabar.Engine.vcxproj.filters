@@ -85,5 +85,14 @@
     <ClInclude Include="include\cinna\EngineConstants.h">
       <Filter>Source Files\Constants</Filter>
     </ClInclude>
+    <ClInclude Include="include\cinna\ConfigurationContext.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\AudioContext.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\InputContext.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

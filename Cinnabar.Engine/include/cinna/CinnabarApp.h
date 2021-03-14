@@ -28,8 +28,8 @@ namespace cinna
 		void allegro_ensure_success(bool system_result, string_view const system_name);
 		void allegro_setup();
 		void allegro_shutdown();
-		void engine_initialize();
 		void engine_run();
+		void engine_setup();
 		void engine_shutdown();
 		void handle_event(ALLEGRO_EVENT const& event, EngineContext& engine_context);
 		void handle_shutdown_event(ALLEGRO_EVENT const& event, EngineContext& engine_context);

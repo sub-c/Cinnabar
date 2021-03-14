@@ -19,6 +19,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\cinna\AudioContext.h" />
+    <ClInclude Include="include\cinna\ConfigurationContext.h" />
     <ClInclude Include="include\cinna\EngineConstants.h" />
     <ClInclude Include="include\cinna\EngineContext.h" />
     <ClInclude Include="include\cinna\GraphicsConstants.h" />
@@ -35,6 +37,7 @@
     <ClInclude Include="include\cinna\EcsSystemManager.h" />
     <ClInclude Include="include\cinna\EcsTypes.h" />
     <ClInclude Include="include\cinna\GraphicsSystem.h" />
+    <ClInclude Include="include\cinna\InputContext.h" />
     <ClInclude Include="include\cinna\PCH.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -91,6 +94,7 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)\deps\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

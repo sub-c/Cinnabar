@@ -6,7 +6,7 @@
 
 namespace cinna
 {
-	struct EngineContext
+	struct EngineContext final
 	{
 		shared_ptr<GraphicsSystem> graphics_system { nullptr };
 

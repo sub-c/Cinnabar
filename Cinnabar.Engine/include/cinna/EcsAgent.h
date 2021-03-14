@@ -78,6 +78,12 @@ namespace cinna
 		}
 
 		template <typename T>
+		bool is_component_registered()
+		{
+			return component_manager_->is_component_registered<T>();
+		}
+
+		template <typename T>
 		void register_component()
 		{
 			component_manager_->register_component<T>();

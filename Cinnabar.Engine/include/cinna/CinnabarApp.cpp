@@ -1,10 +1,13 @@
 #include "PCH.h"
 
+#include "AudioContext.h"
 #include "CinnabarApp.h"
 #include "CinnabarException.h"
+#include "ConfigurationContext.h"
 #include "EngineConstants.h"
 #include "EngineContext.h"
 #include "GraphicsContext.h"
+#include "InputContext.h"
 
 namespace cinna
 {
@@ -19,17 +22,36 @@ namespace cinna
 
 	void CinnabarApp::run()
 	{
-		allegro_setup();
-		register_engine_components();
-		register_engine_systems();
-		register_components();
-		register_systems();
+		try
+		{
+			allegro_setup();
+			register_engine_components();
+			register_engine_systems();
+			register_components();
+			register_systems();
 
-		engine_initialize();
-		engine_run();
+			engine_setup();
+			engine_run();
 
-		engine_shutdown();
-		allegro_shutdown();
+			engine_shutdown();
+			allegro_shutdown();
+		}
+		catch (CinnabarException ex)
+		{
+			ALLEGRO_DISPLAY* display = nullptr;
+			if (ecs_agent_->is_component_registered<GraphicsContext>())
+			{
+				display = ecs_agent_->get_component<GraphicsContext>().display;
+			}
+			al_show_native_message_box(
+				display,
+				"Cinnabar Engine",
+				"An exception occurred:",
+				ex.what(),
+				nullptr,
+				ALLEGRO_MESSAGEBOX_ERROR);
+		}
+		
 	}
 
 	// Private functions //////////////////////////////////////////////////////////////////////////
@@ -47,26 +69,21 @@ namespace cinna
 	void CinnabarApp::allegro_setup()
 	{
 		allegro_ensure_success(al_init(), "Core");
+		allegro_ensure_success(al_install_keyboard(), "Keyboard");
+		allegro_ensure_success(al_install_mouse(), "Mouse");
+		allegro_ensure_success(al_install_joystick(), "Joystick");
+		allegro_ensure_success(al_init_image_addon(), "Image");
+		allegro_ensure_success(al_init_native_dialog_addon(), "Native dialog");
 	}
 
 	void CinnabarApp::allegro_shutdown()
 	{
+		al_shutdown_native_dialog_addon();
+		al_shutdown_image_addon();
+		al_uninstall_joystick();
+		al_uninstall_mouse();
+		al_uninstall_keyboard();
 		al_uninstall_system();
-	}
-
-	void CinnabarApp::engine_initialize()
-	{
-		auto& engine_context = ecs_agent_->get_component<EngineContext>();
-		auto& graphics_context = ecs_agent_->get_component<GraphicsContext>();
-
-		engine_context.event_queue = al_create_event_queue();
-
-		engine_context.timer = al_create_timer(ALLEGRO_BPS_TO_SECS(EngineConstants::DefaultUpdatesPerSecond));
-		al_register_event_source(engine_context.event_queue, al_get_timer_event_source(engine_context.timer));
-		al_start_timer(engine_context.timer);
-
-		engine_context.graphics_system->display_setup();
-		al_register_event_source(engine_context.event_queue, al_get_display_event_source(graphics_context.display));
 	}
 
 	void CinnabarApp::engine_run()
@@ -87,6 +104,21 @@ namespace cinna
 				engine_context.redraw_frame = false;
 			}
 		}
+	}
+
+	void CinnabarApp::engine_setup()
+	{
+		auto& engine_context = ecs_agent_->get_component<EngineContext>();
+		auto& graphics_context = ecs_agent_->get_component<GraphicsContext>();
+
+		engine_context.event_queue = al_create_event_queue();
+
+		engine_context.timer = al_create_timer(ALLEGRO_BPS_TO_SECS(EngineConstants::DefaultUpdatesPerSecond));
+		al_register_event_source(engine_context.event_queue, al_get_timer_event_source(engine_context.timer));
+		al_start_timer(engine_context.timer);
+
+		engine_context.graphics_system->display_setup();
+		al_register_event_source(engine_context.event_queue, al_get_display_event_source(graphics_context.display));
 	}
 
 	void CinnabarApp::engine_shutdown()
@@ -131,19 +163,32 @@ namespace cinna
 
 	void CinnabarApp::handle_timer_event(ALLEGRO_EVENT const& event, EngineContext& engine_context)
 	{
+		update();
 		engine_context.redraw_frame = true;
 	}
 
 	void CinnabarApp::register_engine_components()
 	{
+		ecs_agent_->register_component<AudioContext>();
+		ecs_agent_->register_component<ConfigurationContext>();
 		ecs_agent_->register_component<EngineContext>();
 		ecs_agent_->register_component<GraphicsContext>();
+		ecs_agent_->register_component<InputContext>();
+
+		AudioContext audio_context;
+		ecs_agent_->add_component(audio_context);
+
+		ConfigurationContext configuration_context;
+		ecs_agent_->add_component(configuration_context);
 
 		EngineContext engine_context;
 		ecs_agent_->add_component(engine_context);
 
 		GraphicsContext graphics_context;
 		ecs_agent_->add_component(graphics_context);
+
+		InputContext input_context;
+		ecs_agent_->add_component(input_context);
 	}
 
 	void CinnabarApp::register_engine_systems()
