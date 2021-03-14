@@ -10,8 +10,9 @@ namespace cinna
 	{
 		shared_ptr<GraphicsSystem> graphics_system { nullptr };
 
-		bool running { false };
 		ALLEGRO_EVENT_QUEUE* event_queue { nullptr };
+		bool redraw_frame { false };
+		bool running { false };
 		ALLEGRO_TIMER* timer { nullptr };
 	};
 }

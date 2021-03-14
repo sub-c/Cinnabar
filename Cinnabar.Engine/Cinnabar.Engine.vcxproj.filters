@@ -32,12 +32,6 @@
     <ClCompile Include="include\cinna\GraphicsSystem.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="include\cinna\GraphicsConstants.cpp">
-      <Filter>Source Files\Constants</Filter>
-    </ClCompile>
-    <ClCompile Include="include\cinna\EngineConstants.cpp">
-      <Filter>Source Files\Constants</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\cinna\PCH.h">

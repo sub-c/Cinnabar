@@ -2,5 +2,5 @@
 
 namespace cinna::EngineConstants
 {
-	extern int DefaultUpdatesPerSecond;
+	inline int const DefaultUpdatesPerSecond { 60 };
 }

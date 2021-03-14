@@ -11,8 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="include\cinna\EngineConstants.cpp" />
-    <ClCompile Include="include\cinna\GraphicsConstants.cpp" />
     <ClCompile Include="include\cinna\CinnabarApp.cpp" />
     <ClCompile Include="include\cinna\GraphicsSystem.cpp" />
     <ClCompile Include="include\cinna\PCH.cpp">

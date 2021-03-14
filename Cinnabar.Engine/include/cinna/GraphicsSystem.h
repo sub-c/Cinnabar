@@ -11,5 +11,6 @@ namespace cinna
 	public:
 		void display_setup();
 		void display_shutdown();
+		void draw_frame();
 	};
 }

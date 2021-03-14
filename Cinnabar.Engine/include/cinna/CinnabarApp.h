@@ -17,6 +17,7 @@ namespace cinna
 		void run();
 
 	protected:
+		virtual bool can_shutdown() = 0;
 		virtual void register_components() = 0;
 		virtual void register_systems() = 0;
 		virtual void update() = 0;
@@ -31,6 +32,8 @@ namespace cinna
 		void engine_run();
 		void engine_shutdown();
 		void handle_event(ALLEGRO_EVENT const& event, EngineContext& engine_context);
+		void handle_shutdown_event(ALLEGRO_EVENT const& event, EngineContext& engine_context);
+		void handle_timer_event(ALLEGRO_EVENT const& event, EngineContext& engine_context);
 		void register_engine_components();
 		void register_engine_systems();
 	};

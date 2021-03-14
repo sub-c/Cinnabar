@@ -80,6 +80,12 @@ namespace cinna
 		{
 			al_wait_for_event(engine_context.event_queue, &event);
 			handle_event(event, engine_context);
+
+			if (engine_context.redraw_frame && al_is_event_queue_empty(engine_context.event_queue))
+			{
+				engine_context.graphics_system->draw_frame();
+				engine_context.redraw_frame = false;
+			}
 		}
 	}
 
@@ -98,16 +104,34 @@ namespace cinna
 		al_destroy_event_queue(engine_context.event_queue);
 	}
 
-	void CinnabarApp::handle_event(ALLEGRO_EVENT const& event, EngineContext& engine_context)
+	void CinnabarApp::handle_shutdown_event(ALLEGRO_EVENT const& event, EngineContext& engine_context)
 	{
-		if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+		if (can_shutdown())
 		{
 			engine_context.running = false;
 		}
-		else if (event.type == ALLEGRO_EVENT_TIMER)
+	}
+
+	void CinnabarApp::handle_event(ALLEGRO_EVENT const& event, EngineContext& engine_context)
+	{
+		switch (event.type)
 		{
-			auto a = 5;
+			case ALLEGRO_EVENT_DISPLAY_CLOSE:
+				handle_shutdown_event(event, engine_context);
+				break;
+
+			case ALLEGRO_EVENT_TIMER:
+				handle_timer_event(event, engine_context);
+				break;
+
+			default:
+				break;
 		}
+	}
+
+	void CinnabarApp::handle_timer_event(ALLEGRO_EVENT const& event, EngineContext& engine_context)
+	{
+		engine_context.redraw_frame = true;
 	}
 
 	void CinnabarApp::register_engine_components()
