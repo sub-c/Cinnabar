@@ -16,6 +16,22 @@ namespace cinna
 		void configuration_save();
 
 	private:
-		void populate_graphics_configuration(ALLEGRO_CONFIG* config, GraphicsConfiguration& graphics_config);
+		template <typename T>
+		T get_config_value(ALLEGRO_CONFIG const* config, char const* section, char const* key)
+		{
+			stringstream ss;
+			ss << al_get_config_value(config, section, key);
+			T value;
+			ss >> value;
+			return value;
+		}
+
+		template <typename T>
+		void set_config_value(ALLEGRO_CONFIG* config, char const* section, char const* key, T value)
+		{
+			stringstream ss;
+			ss << value;
+			al_set_config_value(config, section, key, ss.str().c_str());
+		}
 	};
 }

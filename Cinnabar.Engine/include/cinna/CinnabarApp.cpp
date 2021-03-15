@@ -115,6 +115,7 @@ namespace cinna
 		auto& graphics_context = ecs_agent_->get_component<GraphicsContext>();
 
 		engine_context.configuration_system->apply_engine_configuration(engine_config);
+		engine_context.configuration_system->configuration_load();
 
 		engine_context.event_queue = al_create_event_queue();
 
