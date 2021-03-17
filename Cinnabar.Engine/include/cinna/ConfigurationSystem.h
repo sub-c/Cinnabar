@@ -33,5 +33,8 @@ namespace cinna
 			ss << value;
 			al_set_config_value(config, section, key, ss.str().c_str());
 		}
+
+		void configuration_load_graphics(ALLEGRO_CONFIG* config, GraphicsConfiguration& graphics_config);
+		void configuration_save_graphics(ALLEGRO_CONFIG* config, GraphicsConfiguration& graphics_config);
 	};
 }

@@ -3,14 +3,13 @@
 #include "cinna/EngineConfiguration.h"
 #include "GameApp.h"
 
-#include <iostream>
-
 int main(int argc, char* argv[])
 {
 	try
 	{
 		cinna::EngineConfiguration engine_config;
 		engine_config.configuration_path_app_name = "AppName";
+		engine_config.configuration_path_filename = "App.cfg";
 		engine_config.display_default_resolution_height = 1080;
 		engine_config.display_default_resolution_width = 1920;
 		engine_config.display_window_title = "Game App";
@@ -21,8 +20,13 @@ int main(int argc, char* argv[])
 	}
 	catch (exception ex)
 	{
-		// show native dialog of exception
-		std::cout << "An exception occured: " << ex.what() << std::endl;
+		al_show_native_message_box(
+			nullptr,
+			"App",
+			"An exception occurred:",
+			ex.what(),
+			nullptr,
+			0);
 	}
 
 	return 0;

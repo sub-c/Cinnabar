@@ -42,8 +42,40 @@ namespace cinna
 			}
 		}
 
-		auto& graphics_config = config_context.graphics_configuration;
+		configuration_load_graphics(config, config_context.graphics_configuration);
 
+		al_destroy_config(config);
+	}
+
+	void ConfigurationSystem::configuration_save()
+	{
+		auto& config_context = ecs_agent->get_component<ConfigurationContext>();
+
+		auto* config_path = al_get_standard_path(ALLEGRO_USER_SETTINGS_PATH);
+		auto const* config_path_cstr = al_path_cstr(config_path, ALLEGRO_NATIVE_PATH_SEP);
+		if (!al_filename_exists(config_path_cstr) && !al_make_directory(config_path_cstr))
+		{
+			stringstream ss;
+			ss << "Could not create configuration directory: " << config_path_cstr;
+			throw CinnabarException(ss);
+		}
+
+		ALLEGRO_CONFIG* config = al_create_config();
+		
+		configuration_save_graphics(config, config_context.graphics_configuration);
+
+		al_set_path_filename(config_path, config_context.configuration_filename.c_str());
+		config_path_cstr = al_path_cstr(config_path, ALLEGRO_NATIVE_PATH_SEP);
+		al_save_config_file(config_path_cstr, config);
+
+		al_destroy_config(config);
+		al_destroy_path(config_path);
+	}
+
+	// Private functions //////////////////////////////////////////////////////////////////////////
+
+	void ConfigurationSystem::configuration_load_graphics(ALLEGRO_CONFIG* config, GraphicsConfiguration& graphics_config)
+	{
 		graphics_config.display_fullscreen = get_config_value<bool>(
 			config,
 			ConfigurationConstants::DISPLAY_SECTION.c_str(),
@@ -63,26 +95,10 @@ namespace cinna
 			config,
 			ConfigurationConstants::DISPLAY_SECTION.c_str(),
 			ConfigurationConstants::DISPLAY_VSYNC.c_str());
-
-		al_destroy_config(config);
 	}
 
-	void ConfigurationSystem::configuration_save()
+	void ConfigurationSystem::configuration_save_graphics(ALLEGRO_CONFIG* config, GraphicsConfiguration& graphics_config)
 	{
-		auto& config_context = ecs_agent->get_component<ConfigurationContext>();
-
-		auto* config_path = al_get_standard_path(ALLEGRO_USER_SETTINGS_PATH);
-		auto const* config_path_cstr = al_path_cstr(config_path, ALLEGRO_NATIVE_PATH_SEP);
-		if (!al_filename_exists(config_path_cstr) && !al_make_directory(config_path_cstr))
-		{
-			stringstream ss;
-			ss << "Could not create configuration directory: " << config_path_cstr;
-			throw CinnabarException(ss);
-		}
-
-		ALLEGRO_CONFIG* config = al_create_config();
-		auto const& graphics_config = config_context.graphics_configuration;
-
 		set_config_value(
 			config,
 			ConfigurationConstants::DISPLAY_SECTION.c_str(),
@@ -106,14 +122,5 @@ namespace cinna
 			ConfigurationConstants::DISPLAY_SECTION.c_str(),
 			ConfigurationConstants::DISPLAY_VSYNC.c_str(),
 			graphics_config.display_vsync);
-
-		al_set_path_filename(config_path, config_context.configuration_filename.c_str());
-		config_path_cstr = al_path_cstr(config_path, ALLEGRO_NATIVE_PATH_SEP);
-		al_save_config_file(config_path_cstr, config);
-
-		al_destroy_config(config);
-		al_destroy_path(config_path);
 	}
-
-	// Private functions //////////////////////////////////////////////////////////////////////////
 }
