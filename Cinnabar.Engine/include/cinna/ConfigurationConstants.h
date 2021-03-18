@@ -4,9 +4,13 @@
 
 namespace cinna::ConfigurationConstants
 {
-	inline string DISPLAY_FULLSCREEN { "fullscreen" };
-	inline string DISPLAY_RESOLUTION_HEIGHT { "height" };
-	inline string DISPLAY_RESOLUTION_WIDTH { "width" };
-	inline string DISPLAY_SECTION { "display" };
-	inline string DISPLAY_VSYNC { "vsync" };
+	constexpr char const* AUDIO_MUSIC_VOLUME { "music_vol" };
+	constexpr char const* AUDIO_SECTION { "audio" };
+	constexpr char const* AUDIO_SOUND_EFFECT_VOLUME { "sfx_vol" };
+
+	constexpr char const* DISPLAY_FULLSCREEN { "fullscreen" };
+	constexpr char const* DISPLAY_RESOLUTION_HEIGHT { "height" };
+	constexpr char const* DISPLAY_RESOLUTION_WIDTH { "width" };
+	constexpr char const* DISPLAY_SECTION { "display" };
+	constexpr char const* DISPLAY_VSYNC { "vsync" };
 }

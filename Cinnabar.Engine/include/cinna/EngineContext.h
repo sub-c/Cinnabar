@@ -2,6 +2,7 @@
 
 #include "PCH.h"
 
+#include "AudioSystem.h"
 #include "ConfigurationSystem.h"
 #include "GraphicsSystem.h"
 
@@ -9,6 +10,7 @@ namespace cinna
 {
 	struct EngineContext final
 	{
+		shared_ptr<AudioSystem> audio_system { nullptr };
 		shared_ptr<ConfigurationSystem> configuration_system { nullptr };
 		shared_ptr<GraphicsSystem> graphics_system { nullptr };
 

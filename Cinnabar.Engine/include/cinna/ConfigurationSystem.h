@@ -2,6 +2,7 @@
 
 #include "PCH.h"
 
+#include "AudioConfiguration.h"
 #include "EcsSystem.h"
 #include "EngineConfiguration.h"
 #include "GraphicsConfiguration.h"
@@ -34,7 +35,9 @@ namespace cinna
 			al_set_config_value(config, section, key, ss.str().c_str());
 		}
 
+		void configuration_load_audio(ALLEGRO_CONFIG* config, AudioConfiguration& audio_config);
 		void configuration_load_graphics(ALLEGRO_CONFIG* config, GraphicsConfiguration& graphics_config);
+		void configuration_save_audio(ALLEGRO_CONFIG* config, AudioConfiguration& audio_config);
 		void configuration_save_graphics(ALLEGRO_CONFIG* config, GraphicsConfiguration& graphics_config);
 	};
 }

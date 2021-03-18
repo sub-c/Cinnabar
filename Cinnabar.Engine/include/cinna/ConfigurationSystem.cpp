@@ -12,12 +12,12 @@ namespace cinna
 	void ConfigurationSystem::apply_engine_configuration(EngineConfiguration& engine_config)
 	{
 		auto& config_context = ecs_agent->get_component<ConfigurationContext>();
-		auto& graphics_config = config_context.graphics_configuration;
 
 		al_set_app_name(engine_config.configuration_path_app_name.c_str());
 		al_set_org_name(engine_config.configuration_path_org_name.c_str());
 		config_context.configuration_filename = engine_config.configuration_path_filename;
 
+		auto& graphics_config = config_context.graphics_configuration;
 		graphics_config.display_buffer_resolution_height = engine_config.display_buffer_height;
 		graphics_config.display_buffer_resolution_width = engine_config.display_buffer_width;
 		graphics_config.display_resolution_height = engine_config.display_default_resolution_height;
@@ -42,6 +42,7 @@ namespace cinna
 			}
 		}
 
+		configuration_load_audio(config, config_context.audio_configuration);
 		configuration_load_graphics(config, config_context.graphics_configuration);
 
 		al_destroy_config(config);
@@ -61,7 +62,7 @@ namespace cinna
 		}
 
 		ALLEGRO_CONFIG* config = al_create_config();
-		
+		configuration_save_audio(config, config_context.audio_configuration);
 		configuration_save_graphics(config, config_context.graphics_configuration);
 
 		al_set_path_filename(config_path, config_context.configuration_filename.c_str());
@@ -74,53 +75,81 @@ namespace cinna
 
 	// Private functions //////////////////////////////////////////////////////////////////////////
 
+	void ConfigurationSystem::configuration_load_audio(ALLEGRO_CONFIG* config, AudioConfiguration& audio_config)
+	{
+		audio_config.music_volume = get_config_value<float>(
+			config,
+			ConfigurationConstants::AUDIO_SECTION,
+			ConfigurationConstants::AUDIO_MUSIC_VOLUME);
+
+		audio_config.sound_effect_volume = get_config_value<float>(
+			config,
+			ConfigurationConstants::AUDIO_SECTION,
+			ConfigurationConstants::AUDIO_SOUND_EFFECT_VOLUME);
+	}
+
 	void ConfigurationSystem::configuration_load_graphics(ALLEGRO_CONFIG* config, GraphicsConfiguration& graphics_config)
 	{
 		graphics_config.display_fullscreen = get_config_value<bool>(
 			config,
-			ConfigurationConstants::DISPLAY_SECTION.c_str(),
-			ConfigurationConstants::DISPLAY_FULLSCREEN.c_str());
+			ConfigurationConstants::DISPLAY_SECTION,
+			ConfigurationConstants::DISPLAY_FULLSCREEN);
 
 		graphics_config.display_resolution_height = get_config_value<int>(
 			config,
-			ConfigurationConstants::DISPLAY_SECTION.c_str(),
-			ConfigurationConstants::DISPLAY_RESOLUTION_HEIGHT.c_str());
+			ConfigurationConstants::DISPLAY_SECTION,
+			ConfigurationConstants::DISPLAY_RESOLUTION_HEIGHT);
 
 		graphics_config.display_resolution_width = get_config_value<int>(
 			config,
-			ConfigurationConstants::DISPLAY_SECTION.c_str(),
-			ConfigurationConstants::DISPLAY_RESOLUTION_WIDTH.c_str());
+			ConfigurationConstants::DISPLAY_SECTION,
+			ConfigurationConstants::DISPLAY_RESOLUTION_WIDTH);
 
 		graphics_config.display_vsync = get_config_value<bool>(
 			config,
-			ConfigurationConstants::DISPLAY_SECTION.c_str(),
-			ConfigurationConstants::DISPLAY_VSYNC.c_str());
+			ConfigurationConstants::DISPLAY_SECTION,
+			ConfigurationConstants::DISPLAY_VSYNC);
+	}
+
+	void ConfigurationSystem::configuration_save_audio(ALLEGRO_CONFIG* config, AudioConfiguration& audio_config)
+	{
+		set_config_value(
+			config,
+			ConfigurationConstants::AUDIO_SECTION,
+			ConfigurationConstants::AUDIO_MUSIC_VOLUME,
+			audio_config.music_volume);
+
+		set_config_value(
+			config,
+			ConfigurationConstants::AUDIO_SECTION,
+			ConfigurationConstants::AUDIO_SOUND_EFFECT_VOLUME,
+			audio_config.sound_effect_volume);
 	}
 
 	void ConfigurationSystem::configuration_save_graphics(ALLEGRO_CONFIG* config, GraphicsConfiguration& graphics_config)
 	{
 		set_config_value(
 			config,
-			ConfigurationConstants::DISPLAY_SECTION.c_str(),
-			ConfigurationConstants::DISPLAY_FULLSCREEN.c_str(),
+			ConfigurationConstants::DISPLAY_SECTION,
+			ConfigurationConstants::DISPLAY_FULLSCREEN,
 			graphics_config.display_fullscreen);
 
 		set_config_value(
 			config,
-			ConfigurationConstants::DISPLAY_SECTION.c_str(),
-			ConfigurationConstants::DISPLAY_RESOLUTION_HEIGHT.c_str(),
+			ConfigurationConstants::DISPLAY_SECTION,
+			ConfigurationConstants::DISPLAY_RESOLUTION_HEIGHT,
 			graphics_config.display_resolution_height);
 
 		set_config_value(
 			config,
-			ConfigurationConstants::DISPLAY_SECTION.c_str(),
-			ConfigurationConstants::DISPLAY_RESOLUTION_WIDTH.c_str(),
+			ConfigurationConstants::DISPLAY_SECTION,
+			ConfigurationConstants::DISPLAY_RESOLUTION_WIDTH,
 			graphics_config.display_resolution_width);
 
 		set_config_value(
 			config,
-			ConfigurationConstants::DISPLAY_SECTION.c_str(),
-			ConfigurationConstants::DISPLAY_VSYNC.c_str(),
+			ConfigurationConstants::DISPLAY_SECTION,
+			ConfigurationConstants::DISPLAY_VSYNC,
 			graphics_config.display_vsync);
 	}
 }

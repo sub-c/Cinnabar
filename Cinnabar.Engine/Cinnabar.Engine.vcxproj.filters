@@ -38,6 +38,9 @@
     <ClCompile Include="include\cinna\ConfigurationSystem.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="include\cinna\AudioSystem.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\cinna\PCH.h">
@@ -111,6 +114,21 @@
     </ClInclude>
     <ClInclude Include="include\cinna\ConfigurationConstants.h">
       <Filter>Source Files\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\AudioConstants.h">
+      <Filter>Source Files\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\AudioConfiguration.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\AudioSystem.h">
+      <Filter>Source Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\Vector2.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\Rect.h">
+      <Filter>Source Files\Models</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

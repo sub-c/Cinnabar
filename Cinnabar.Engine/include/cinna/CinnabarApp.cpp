@@ -1,6 +1,7 @@
 #include "PCH.h"
 
 #include "AudioContext.h"
+#include "AudioSystem.h"
 #include "CinnabarApp.h"
 #include "CinnabarException.h"
 #include "ConfigurationContext.h"
@@ -119,6 +120,10 @@ namespace cinna
 
 		engine_context.event_queue = al_create_event_queue();
 
+		al_register_event_source(engine_context.event_queue, al_get_keyboard_event_source());
+		al_register_event_source(engine_context.event_queue, al_get_mouse_event_source());
+		al_register_event_source(engine_context.event_queue, al_get_joystick_event_source());
+
 		engine_context.timer = al_create_timer(ALLEGRO_BPS_TO_SECS(engine_config.updates_per_second));
 		al_register_event_source(engine_context.event_queue, al_get_timer_event_source(engine_context.timer));
 		al_start_timer(engine_context.timer);
@@ -140,6 +145,10 @@ namespace cinna
 		al_stop_timer(engine_context.timer);
 		al_unregister_event_source(engine_context.event_queue, al_get_timer_event_source(engine_context.timer));
 		al_destroy_timer(engine_context.timer);
+
+		al_unregister_event_source(engine_context.event_queue, al_get_joystick_event_source());
+		al_unregister_event_source(engine_context.event_queue, al_get_mouse_event_source());
+		al_unregister_event_source(engine_context.event_queue, al_get_keyboard_event_source());
 
 		al_destroy_event_queue(engine_context.event_queue);
 	}
@@ -202,6 +211,12 @@ namespace cinna
 	void CinnabarApp::register_engine_systems()
 	{
 		auto& engine_context = ecs_agent_->get_component<EngineContext>();
+
+		engine_context.audio_system = ecs_agent_->register_system<AudioSystem>();
+		{
+			EcsSignature signature;
+			ecs_agent_->set_system_signature<AudioSystem>(signature);
+		}
 
 		engine_context.configuration_system = ecs_agent_->register_system<ConfigurationSystem>();
 		{
