@@ -106,10 +106,23 @@ xcopy /E /Y "$(SolutionDir)deps\release\bin\brotlicommon.dll" "$(TargetDir)"</Co
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)deps\debug\lib\allegro_monolith-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)deps\release\lib\allegro_monolith.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Message>Copy third-party DLLs...</Message>
+      <Command>xcopy /E /Y "$(SolutionDir)deps\release\bin\allegro_monolith-5.2.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\libpng16.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\FLAC.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\vorbisfile.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\freetype.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\zlib1.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\physfs.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\ogg.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\bz2.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\vorbis.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\brotlidec.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\brotlicommon.dll" "$(TargetDir)"
+xcopy /E /Y "$(SolutionDir)deps\release\bin\OpenAL32.dll" "$(TargetDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
