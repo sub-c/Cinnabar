@@ -145,5 +145,11 @@
     <ClInclude Include="include\cinna\InputSystem.h">
       <Filter>Source Files\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="include\cinna\InputConfiguration.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\InputConstants.h">
+      <Filter>Source Files\Constants</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

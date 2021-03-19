@@ -4,7 +4,7 @@
 
 namespace cinna
 {
-	struct ControllerState
+	struct ControllerState final
 	{
 		Button Down {};
 		Button Left {};

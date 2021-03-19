@@ -7,7 +7,7 @@
 
 namespace cinna
 {
-	struct EngineConfiguration
+	struct EngineConfiguration final
 	{
 		string configuration_path_app_name {};
 		string configuration_path_filename { EngineConstants::DEFAULT_CONFIGURATION_FILENAME };

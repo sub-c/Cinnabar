@@ -6,7 +6,7 @@
 
 namespace cinna
 {
-	struct GraphicsConfiguration
+	struct GraphicsConfiguration final
 	{
 		int display_buffer_resolution_height { GraphicsConstants::DEFAULT_DISPLAY_BUFFER_RESOLUTION_HEIGHT };
 		int display_buffer_resolution_width { GraphicsConstants::DEFAULT_DISPLAY_BUFFER_RESOLUTION_WIDTH };

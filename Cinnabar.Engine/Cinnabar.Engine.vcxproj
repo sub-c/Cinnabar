@@ -50,6 +50,8 @@
     <ClInclude Include="include\cinna\EcsSystemManager.h" />
     <ClInclude Include="include\cinna\EcsTypes.h" />
     <ClInclude Include="include\cinna\GraphicsSystem.h" />
+    <ClInclude Include="include\cinna\InputConfiguration.h" />
+    <ClInclude Include="include\cinna\InputConstants.h" />
     <ClInclude Include="include\cinna\InputContext.h" />
     <ClInclude Include="include\cinna\InputSystem.h" />
     <ClInclude Include="include\cinna\PCH.h" />

@@ -2,7 +2,7 @@
 
 namespace cinna
 {
-	struct Button
+	struct Button final
 	{
 		bool just_pressed { false };
 		bool pressed { false };
