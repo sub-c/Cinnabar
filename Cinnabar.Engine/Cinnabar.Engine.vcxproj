@@ -15,12 +15,15 @@
     <ClCompile Include="include\cinna\CinnabarApp.cpp" />
     <ClCompile Include="include\cinna\ConfigurationSystem.cpp" />
     <ClCompile Include="include\cinna\GraphicsSystem.cpp" />
+    <ClCompile Include="include\cinna\InputSystem.cpp" />
     <ClCompile Include="include\cinna\PCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\cinna\Button.h" />
+    <ClInclude Include="include\cinna\ControllerState.h" />
     <ClInclude Include="include\cinna\AudioConfiguration.h" />
     <ClInclude Include="include\cinna\AudioConstants.h" />
     <ClInclude Include="include\cinna\AudioContext.h" />
@@ -48,6 +51,7 @@
     <ClInclude Include="include\cinna\EcsTypes.h" />
     <ClInclude Include="include\cinna\GraphicsSystem.h" />
     <ClInclude Include="include\cinna\InputContext.h" />
+    <ClInclude Include="include\cinna\InputSystem.h" />
     <ClInclude Include="include\cinna\PCH.h" />
     <ClInclude Include="include\cinna\Rect.h" />
     <ClInclude Include="include\cinna\Vector2.h" />

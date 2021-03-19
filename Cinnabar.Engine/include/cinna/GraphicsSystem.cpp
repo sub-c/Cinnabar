@@ -99,8 +99,14 @@ namespace cinna
 			al_get_display_width(graphics_context.display),
 			al_get_display_height(graphics_context.display),
 			0);
+		draw_debug_text();
+		al_flip_display();
+	}
 
-		// debug
+	// Private functions /////////////////////////////////////////////////////////////////////////////
+
+	void GraphicsSystem::draw_debug_text()
+	{
 		auto& debug_context = ecs_agent->get_component<DebugContext>();
 		if (debug_context.enabled)
 		{
@@ -121,7 +127,5 @@ namespace cinna
 				debug_context.text_lines->clear();
 			}
 		}
-
-		al_flip_display();
 	}
 }

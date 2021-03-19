@@ -12,6 +12,7 @@
 #include "EngineContext.h"
 #include "GraphicsContext.h"
 #include "InputContext.h"
+#include "InputSystem.h"
 
 namespace cinna
 {
@@ -171,6 +172,27 @@ namespace cinna
 				handle_shutdown_event(event, engine_context);
 				break;
 
+			case ALLEGRO_EVENT_JOYSTICK_AXIS:
+			case ALLEGRO_EVENT_JOYSTICK_BUTTON_DOWN:
+			case ALLEGRO_EVENT_JOYSTICK_BUTTON_UP:
+			case ALLEGRO_EVENT_JOYSTICK_CONFIGURATION:
+				engine_context.input_system->handle_joystick_event(event);
+				break;
+
+			case ALLEGRO_EVENT_KEY_DOWN:
+			case ALLEGRO_EVENT_KEY_UP:
+				engine_context.input_system->handle_keyboard_event(event);
+				break;
+
+			case ALLEGRO_EVENT_MOUSE_AXES:
+			case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
+			case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
+			case ALLEGRO_EVENT_MOUSE_ENTER_DISPLAY:
+			case ALLEGRO_EVENT_MOUSE_LEAVE_DISPLAY:
+			case ALLEGRO_EVENT_MOUSE_WARPED:
+				engine_context.input_system->handle_mouse_event(event);
+				break;
+
 			case ALLEGRO_EVENT_TIMER:
 				handle_timer_event(event, engine_context);
 				break;
@@ -183,6 +205,7 @@ namespace cinna
 	void CinnabarApp::handle_timer_event(ALLEGRO_EVENT const& event, EngineContext& engine_context)
 	{
 		update();
+		engine_context.input_system->handle_end_of_frame();
 		engine_context.redraw_frame = true;
 	}
 
@@ -234,6 +257,12 @@ namespace cinna
 		{
 			EcsSignature signature;
 			ecs_agent_->set_system_signature<GraphicsSystem>(signature);
+		}
+
+		engine_context.input_system = ecs_agent_->register_system<InputSystem>();
+		{
+			EcsSignature signature;
+			ecs_agent_->set_system_signature<InputSystem>(signature);
 		}
 	}
 }

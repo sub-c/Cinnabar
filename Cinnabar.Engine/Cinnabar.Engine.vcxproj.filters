@@ -41,6 +41,9 @@
     <ClCompile Include="include\cinna\AudioSystem.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="include\cinna\InputSystem.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\cinna\PCH.h">
@@ -132,6 +135,15 @@
     </ClInclude>
     <ClInclude Include="include\cinna\DebugContext.h">
       <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\ControllerState.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\Button.h">
+      <Filter>Source Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cinna\InputSystem.h">
+      <Filter>Source Files\Systems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
