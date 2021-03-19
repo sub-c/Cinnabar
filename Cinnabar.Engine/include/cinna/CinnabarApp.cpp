@@ -6,6 +6,7 @@
 #include "CinnabarException.h"
 #include "ConfigurationContext.h"
 #include "ConfigurationSystem.h"
+#include "DebugContext.h"
 #include "EngineConfiguration.h"
 #include "EngineConstants.h"
 #include "EngineContext.h"
@@ -112,12 +113,12 @@ namespace cinna
 
 	void CinnabarApp::engine_setup(EngineConfiguration& engine_config)
 	{
-		auto& engine_context = ecs_agent_->get_component<EngineContext>();
-		auto& graphics_context = ecs_agent_->get_component<GraphicsContext>();
+		auto& debug_context = ecs_agent_->get_component<DebugContext>();
+		debug_context.enabled = engine_config.debug_enabled;
 
+		auto& engine_context = ecs_agent_->get_component<EngineContext>();
 		engine_context.configuration_system->apply_engine_configuration(engine_config);
 		engine_context.configuration_system->configuration_load();
-
 		engine_context.event_queue = al_create_event_queue();
 
 		al_register_event_source(engine_context.event_queue, al_get_keyboard_event_source());
@@ -129,6 +130,7 @@ namespace cinna
 		al_start_timer(engine_context.timer);
 
 		engine_context.graphics_system->display_setup();
+		auto& graphics_context = ecs_agent_->get_component<GraphicsContext>();
 		al_register_event_source(engine_context.event_queue, al_get_display_event_source(graphics_context.display));
 	}
 
@@ -188,6 +190,7 @@ namespace cinna
 	{
 		ecs_agent_->register_component<AudioContext>();
 		ecs_agent_->register_component<ConfigurationContext>();
+		ecs_agent_->register_component<DebugContext>();
 		ecs_agent_->register_component<EngineContext>();
 		ecs_agent_->register_component<GraphicsContext>();
 		ecs_agent_->register_component<InputContext>();
@@ -197,6 +200,9 @@ namespace cinna
 
 		ConfigurationContext configuration_context;
 		ecs_agent_->add_component(configuration_context);
+
+		DebugContext debug_context;
+		ecs_agent_->add_component(debug_context);
 
 		EngineContext engine_context;
 		ecs_agent_->add_component(engine_context);

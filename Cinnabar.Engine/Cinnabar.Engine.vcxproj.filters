@@ -130,5 +130,8 @@
     <ClInclude Include="include\cinna\Rect.h">
       <Filter>Source Files\Models</Filter>
     </ClInclude>
+    <ClInclude Include="include\cinna\DebugContext.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 
 #include "CinnabarException.h"
 #include "ConfigurationContext.h"
+#include "DebugContext.h"
 #include "EcsAgent.h"
 #include "GraphicsConstants.h"
 #include "GraphicsContext.h"
@@ -39,6 +40,14 @@ namespace cinna
 		{
 			throw CinnabarException("Could not create display buffer.");
 		}
+
+		// debug
+		auto& debug_context = ecs_agent->get_component<DebugContext>();
+		if (debug_context.enabled)
+		{
+			debug_context.font = al_create_builtin_font();
+		}
+
 		al_set_new_bitmap_flags(ALLEGRO_CONVERT_BITMAP);
 
 		graphics_context.display_clear_color = al_map_rgb_f(
@@ -54,6 +63,14 @@ namespace cinna
 		if (graphics_context.display == nullptr || graphics_context.display_buffer == nullptr)
 		{
 			throw CinnabarException("Attempting to destroy a display while none is active.");
+		}
+
+		// debug
+		auto& debug_context = ecs_agent->get_component<DebugContext>();
+		if (debug_context.enabled)
+		{
+			al_destroy_font(debug_context.font);
+			debug_context.font = nullptr;
 		}
 
 		al_destroy_bitmap(graphics_context.display_buffer);
@@ -82,6 +99,29 @@ namespace cinna
 			al_get_display_width(graphics_context.display),
 			al_get_display_height(graphics_context.display),
 			0);
+
+		// debug
+		auto& debug_context = ecs_agent->get_component<DebugContext>();
+		if (debug_context.enabled)
+		{
+			float y_position = 0.0f;
+			for (auto line = debug_context.text_lines->begin(); line != debug_context.text_lines->end(); ++line)
+			{
+				al_draw_text(
+					debug_context.font,
+					al_map_rgb_f(1.0f, 1.0f, 1.0f),
+					0.0f,
+					y_position,
+					0,
+					line->c_str());
+				y_position += 8.0f;
+			}
+			if (y_position > 0.0f)
+			{
+				debug_context.text_lines->clear();
+			}
+		}
+
 		al_flip_display();
 	}
 }

@@ -28,6 +28,7 @@
     <ClInclude Include="include\cinna\ConfigurationConstants.h" />
     <ClInclude Include="include\cinna\ConfigurationContext.h" />
     <ClInclude Include="include\cinna\ConfigurationSystem.h" />
+    <ClInclude Include="include\cinna\DebugContext.h" />
     <ClInclude Include="include\cinna\EngineConfiguration.h" />
     <ClInclude Include="include\cinna\EngineConstants.h" />
     <ClInclude Include="include\cinna\EngineContext.h" />

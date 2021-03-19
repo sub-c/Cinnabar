@@ -1,6 +1,7 @@
 #pragma once
 
 #include <allegro5/allegro.h>
+#include <allegro5/allegro_font.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_native_dialog.h>
 
@@ -10,6 +11,7 @@
 #include <sstream>
 #include <string_view>
 #include <string>
+#include <vector>
 
 namespace cinna
 {
@@ -21,6 +23,7 @@ namespace cinna
 	using std::string_view;
 	using std::stringstream;
 	using std::unique_ptr;
+	using std::vector;
 
 	// Functions
 	using std::make_shared;

@@ -10,6 +10,7 @@ int main(int argc, char* argv[])
 		cinna::EngineConfiguration engine_config;
 		engine_config.configuration_path_app_name = "AppName";
 		engine_config.configuration_path_filename = "App.cfg";
+		engine_config.debug_enabled = true;
 		engine_config.display_default_resolution_height = 1080;
 		engine_config.display_default_resolution_width = 1920;
 		engine_config.display_window_title = "Game App";
