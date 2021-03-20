@@ -6,18 +6,18 @@ namespace cinna
 {
 	struct ControllerState final
 	{
-		Button Down {};
-		Button Left {};
-		Button Right {};
-		Button Up {};
+		Button down {};
+		Button left {};
+		Button right {};
+		Button up {};
 
-		Button A {};
-		Button B {};
-		Button L {};
-		Button R {};
-		Button Select {};
-		Button Start {};
-		Button X {};
-		Button Y {};
+		Button a {};
+		Button b {};
+		Button l {};
+		Button r {};
+		Button select {};
+		Button start {};
+		Button x {};
+		Button y {};
 	};
 }

@@ -4,6 +4,20 @@
 
 namespace cinna::InputConstants
 {
+	constexpr int DEFAULT_JOYCODE_DOWN { 12 };
+	constexpr int DEFAULT_JOYCODE_LEFT { 11 };
+	constexpr int DEFAULT_JOYCODE_RIGHT { 10 };
+	constexpr int DEFAULT_JOYCODE_UP { 13 };
+
+	constexpr int DEFAULT_JOYCODE_A { 0 };
+	constexpr int DEFAULT_JOYCODE_B { 1 };
+	constexpr int DEFAULT_JOYCODE_L { 4 };
+	constexpr int DEFAULT_JOYCODE_R { 5 };
+	constexpr int DEFAULT_JOYCODE_SELECT { 6 };
+	constexpr int DEFAULT_JOYCODE_START { 7 };
+	constexpr int DEFAULT_JOYCODE_X { 2 };
+	constexpr int DEFAULT_JOYCODE_Y { 3 };
+
 	constexpr int DEFAULT_KEYCODE_DOWN { ALLEGRO_KEY_S };
 	constexpr int DEFAULT_KEYCODE_LEFT { ALLEGRO_KEY_A };
 	constexpr int DEFAULT_KEYCODE_RIGHT { ALLEGRO_KEY_D };

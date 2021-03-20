@@ -122,10 +122,6 @@ namespace cinna
 					line->c_str());
 				y_position += 8.0f;
 			}
-			if (y_position > 0.0f)
-			{
-				debug_context.text_lines->clear();
-			}
 		}
 	}
 }

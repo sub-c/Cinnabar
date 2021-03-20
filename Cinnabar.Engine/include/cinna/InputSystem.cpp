@@ -12,26 +12,23 @@ namespace cinna
 	{
 		auto& controller_state = ecs_agent->get_component<InputContext>().controller_state;
 		
-		controller_state.Down.just_pressed = false;
-		controller_state.Left.just_pressed = false;
-		controller_state.Right.just_pressed = false;
-		controller_state.Up.just_pressed = false;
+		controller_state.down.just_pressed = false;
+		controller_state.left.just_pressed = false;
+		controller_state.right.just_pressed = false;
+		controller_state.up.just_pressed = false;
 
-		controller_state.A.just_pressed = false;
-		controller_state.B.just_pressed = false;
-		controller_state.L.just_pressed = false;
-		controller_state.R.just_pressed = false;
-		controller_state.Select.just_pressed = false;
-		controller_state.Start.just_pressed = false;
-		controller_state.X.just_pressed = false;
-		controller_state.Y.just_pressed = false;
+		controller_state.a.just_pressed = false;
+		controller_state.b.just_pressed = false;
+		controller_state.l.just_pressed = false;
+		controller_state.r.just_pressed = false;
+		controller_state.select.just_pressed = false;
+		controller_state.start.just_pressed = false;
+		controller_state.x.just_pressed = false;
+		controller_state.y.just_pressed = false;
 	}
 
 	void InputSystem::handle_keyboard_event(ALLEGRO_EVENT const& event)
 	{
-		auto& debug_context = ecs_agent->get_component<DebugContext>();
-		debug_context.text_lines->emplace_back("KEY EVENT");
-
 		switch (event.type)
 		{
 			case ALLEGRO_EVENT_KEY_DOWN:
@@ -46,7 +43,20 @@ namespace cinna
 
 	void InputSystem::handle_joystick_event(ALLEGRO_EVENT const& event)
 	{
+		switch (event.type)
+		{
+			case ALLEGRO_EVENT_JOYSTICK_BUTTON_DOWN:
+				handle_joy_down(event.joystick.button);
+				break;
 
+			case ALLEGRO_EVENT_JOYSTICK_BUTTON_UP:
+				handle_joy_up(event.joystick.button);
+				break;
+
+			case ALLEGRO_EVENT_JOYSTICK_CONFIGURATION:
+				al_reconfigure_joysticks();
+				break;
+		}
 	}
 
 	void InputSystem::handle_mouse_event(ALLEGRO_EVENT const& event)
@@ -64,8 +74,47 @@ namespace cinna
 
 	void InputSystem::button_up(Button& button)
 	{
-		button.just_pressed = false;
 		button.pressed = false;
+	}
+
+	void InputSystem::handle_joy_down(int joy_code)
+	{
+		auto& controller_state = ecs_agent->get_component<InputContext>().controller_state;
+		auto& input_config = ecs_agent->get_component<ConfigurationContext>().input_configuration;
+
+		if (joy_code == input_config.joy_code_down) { button_down(controller_state.down); }
+		if (joy_code == input_config.joy_code_left) { button_down(controller_state.left); }
+		if (joy_code == input_config.joy_code_right) { button_down(controller_state.right); }
+		if (joy_code == input_config.joy_code_up) { button_down(controller_state.up); }
+
+		if (joy_code == input_config.joy_code_a) { button_down(controller_state.a); }
+		if (joy_code == input_config.joy_code_b) { button_down(controller_state.b); }
+		if (joy_code == input_config.joy_code_l) { button_down(controller_state.l); }
+		if (joy_code == input_config.joy_code_r) { button_down(controller_state.r); }
+		if (joy_code == input_config.joy_code_select) { button_down(controller_state.select); }
+		if (joy_code == input_config.joy_code_start) { button_down(controller_state.start); }
+		if (joy_code == input_config.joy_code_x) { button_down(controller_state.x); }
+		if (joy_code == input_config.joy_code_y) { button_down(controller_state.y); }
+	}
+
+	void InputSystem::handle_joy_up(int joy_code)
+	{
+		auto& controller_state = ecs_agent->get_component<InputContext>().controller_state;
+		auto& input_config = ecs_agent->get_component<ConfigurationContext>().input_configuration;
+
+		if (joy_code == input_config.joy_code_down) { button_up(controller_state.down); }
+		if (joy_code == input_config.joy_code_left) { button_up(controller_state.left); }
+		if (joy_code == input_config.joy_code_right) { button_up(controller_state.right); }
+		if (joy_code == input_config.joy_code_up) { button_up(controller_state.up); }
+
+		if (joy_code == input_config.joy_code_a) { button_up(controller_state.a); }
+		if (joy_code == input_config.joy_code_b) { button_up(controller_state.b); }
+		if (joy_code == input_config.joy_code_l) { button_up(controller_state.l); }
+		if (joy_code == input_config.joy_code_r) { button_up(controller_state.r); }
+		if (joy_code == input_config.joy_code_select) { button_up(controller_state.select); }
+		if (joy_code == input_config.joy_code_start) { button_up(controller_state.start); }
+		if (joy_code == input_config.joy_code_x) { button_up(controller_state.x); }
+		if (joy_code == input_config.joy_code_y) { button_up(controller_state.y); }
 	}
 
 	void InputSystem::handle_key_down(int key_code)
@@ -73,19 +122,19 @@ namespace cinna
 		auto& controller_state = ecs_agent->get_component<InputContext>().controller_state;
 		auto& input_config = ecs_agent->get_component<ConfigurationContext>().input_configuration;
 
-		if (key_code == input_config.KeyCodeDown) { button_down(controller_state.Down); }
-		if (key_code == input_config.KeyCodeLeft) { button_down(controller_state.Left); }
-		if (key_code == input_config.KeyCodeRight) { button_down(controller_state.Right); }
-		if (key_code == input_config.KeyCodeUp) { button_down(controller_state.Up); }
+		if (key_code == input_config.key_code_down) { button_down(controller_state.down); }
+		if (key_code == input_config.key_code_left) { button_down(controller_state.left); }
+		if (key_code == input_config.key_code_right) { button_down(controller_state.right); }
+		if (key_code == input_config.key_code_up) { button_down(controller_state.up); }
 
-		if (key_code == input_config.KeyCodeA) { button_down(controller_state.A); }
-		if (key_code == input_config.KeyCodeB) { button_down(controller_state.B); }
-		if (key_code == input_config.KeyCodeL) { button_down(controller_state.L); }
-		if (key_code == input_config.KeyCodeR) { button_down(controller_state.R); }
-		if (key_code == input_config.KeyCodeSelect) { button_down(controller_state.Select); }
-		if (key_code == input_config.KeyCodeStart) { button_down(controller_state.Start); }
-		if (key_code == input_config.KeyCodeX) { button_down(controller_state.X); }
-		if (key_code == input_config.KeyCodeY) { button_down(controller_state.Y); }
+		if (key_code == input_config.key_code_a) { button_down(controller_state.a); }
+		if (key_code == input_config.key_code_b) { button_down(controller_state.b); }
+		if (key_code == input_config.key_code_l) { button_down(controller_state.l); }
+		if (key_code == input_config.key_code_r) { button_down(controller_state.r); }
+		if (key_code == input_config.key_code_select) { button_down(controller_state.select); }
+		if (key_code == input_config.key_code_start) { button_down(controller_state.start); }
+		if (key_code == input_config.key_code_x) { button_down(controller_state.x); }
+		if (key_code == input_config.key_code_y) { button_down(controller_state.y); }
 	}
 
 	void InputSystem::handle_key_up(int key_code)
@@ -93,18 +142,18 @@ namespace cinna
 		auto& controller_state = ecs_agent->get_component<InputContext>().controller_state;
 		auto& input_config = ecs_agent->get_component<ConfigurationContext>().input_configuration;
 		
-		if (key_code == input_config.KeyCodeDown) { button_up(controller_state.Down); }
-		if (key_code == input_config.KeyCodeLeft) { button_up(controller_state.Left); }
-		if (key_code == input_config.KeyCodeRight) { button_up(controller_state.Right); }
-		if (key_code == input_config.KeyCodeUp) { button_up(controller_state.Up); }
+		if (key_code == input_config.key_code_down) { button_up(controller_state.down); }
+		if (key_code == input_config.key_code_left) { button_up(controller_state.left); }
+		if (key_code == input_config.key_code_right) { button_up(controller_state.right); }
+		if (key_code == input_config.key_code_up) { button_up(controller_state.up); }
 
-		if (key_code == input_config.KeyCodeA) { button_up(controller_state.A); }
-		if (key_code == input_config.KeyCodeB) { button_up(controller_state.B); }
-		if (key_code == input_config.KeyCodeL) { button_up(controller_state.L); }
-		if (key_code == input_config.KeyCodeR) { button_up(controller_state.R); }
-		if (key_code == input_config.KeyCodeSelect) { button_up(controller_state.Select); }
-		if (key_code == input_config.KeyCodeStart) { button_up(controller_state.Start); }
-		if (key_code == input_config.KeyCodeX) { button_up(controller_state.X); }
-		if (key_code == input_config.KeyCodeY) { button_up(controller_state.Y); }
+		if (key_code == input_config.key_code_a) { button_up(controller_state.a); }
+		if (key_code == input_config.key_code_b) { button_up(controller_state.b); }
+		if (key_code == input_config.key_code_l) { button_up(controller_state.l); }
+		if (key_code == input_config.key_code_r) { button_up(controller_state.r); }
+		if (key_code == input_config.key_code_select) { button_up(controller_state.select); }
+		if (key_code == input_config.key_code_start) { button_up(controller_state.start); }
+		if (key_code == input_config.key_code_x) { button_up(controller_state.x); }
+		if (key_code == input_config.key_code_y) { button_up(controller_state.y); }
 	}
 }
